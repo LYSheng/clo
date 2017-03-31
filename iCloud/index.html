@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>icloud</title>
+	<link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<script></script>
+<body ng-controller="c">
+<div class="mask" ng-show="zhuangt?true:false" ng-click="zhuangt=false"></div>
+	<div class="box">
+			<ul class="left">
+				<li class="left-li">
+					<span class="title">iCoud</span>
+					<span class="iconfont jiajia" ng-click="add()">&#xe602;</span				</li>
+				<li class="left-li">
+					<p class="p1">
+						<span class="iconfont naoz">&#xe63c;</span>
+					</p>
+					<p class="p2">
+						已计划
+					</p>
+				</li>
+				<li class="left-li" ng-repeat="v in data" ng-click="changColor($index)" ng-style="{background:$index==index?'#000':''}">
+					<p class="p1">
+						<span ng-style="{background:v.color}"></span>
+					</p>
+					<p class="p2">
+						{{v.title}}
+						<span class="iconfont" id="tt">&#xe61d;</span>
+					</p>
+				</li>
+					
+			</ul>
+		<div class="right">
+			<div class="rig-top">
+				<div class="rig-jing iconfont">&#xe601;</div>
+				<input type="text" placeholder="搜索所以提示" ng-model="data[index].todo.t">
+			</div>
+			<div class="rig-tis">
+				<div class="rig-tis-li">
+					<span ng-style="{color:data[index].color}" class="rig-li-s1">{{data[index].title}}</span>
+					<div class="rig-liyou">
+					<div class="rig-li-s2" ng-click="block()" ng-style="{color:data[index].color}">选项
+					</div>
+					<div ng-show="zhuangt?true:false" class="rig-abs">
+							<div class="rig-sanj"></div>
+							<div class="rig-abs-nei">
+								<!-- <div class="rig-abs-top"> -->
+									<input type="text" class="rig-abs-top" ng-style="{color:ccolor}" 
+									ng-model=checkTitle
+									 >
+								<!-- </div> -->
+									<span class="rig-sp">列表颜色</span>
+									<ul class="rig-color">
+										<li ng-repeat="f in color" ng-style="{background:f,borderColor:f==ccolor?ccolor:''}" ng-click="absColor(f)"></li>
+										
+									</ul>
+									<div class="rig-xian">
+									</div>
+									<div class="rig-bot">
+										<a href="" class="rig-bot-a" ng-click="del(index)">删除</a>
+										<div class="rig-let-rig">
+											<a href="" class="
+										rig-bot-a2" ng-click="zhuangt=false;">取消</a>
+										<a href="" class="rig-bot-a3" ng-click="over()">完成</a>
+										</div>
+										
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="rig-ul">
+					<li class="rig-list">
+						<span class="rig-id iconfont">&#xe63d;</span>
+						<span class="rig-text">已完成&nbsp:&nbsp<span>{{(data[index].todo|filter:{bool:true}).length}}</span>&nbsp项</span>
+					</li>
+					<li id="ppp" class="rig-list" ng-repeat="x in data[index].todo|filter:{bool:true}">
+						<span class="rig-left" ng-style="{borderColor:data[index].color,background:data[index].color}" ng-click="huilai(x)"></span>
+						<span class="rig-text" contenteditable="true" ng-blur="blurs(x,$event)">{{x.t}}</span>
+					</li>
+					<li class="rig-list">
+						<span class="rig-left"></span>
+						<span class="rig-text">未完成</span>
+					</li>
+					<li class="rig-list" ng-repeat="x in data[index].todo|filter:{bool:false}">
+						<span class="rig-left" ng-style="{borderColor:data[index].color}" ng-click="qiehuan(x)"></span>
+						<span class="rig-text" contenteditable="true" ng-blur="blurs(x,$event)">{{x.t}}</span>
+					</li>
+					<li class="rig-list">
+						<span class="rig-left"></span>
+						<span class="rig-text" ng-click="pushs()">新项目...</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
